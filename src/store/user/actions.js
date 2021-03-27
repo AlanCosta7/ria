@@ -73,6 +73,41 @@ export function createUserWithEmailAndPassword ({ commit, state }, payload) {
 
 }
 
+
+export function salvarInteresses({ commit, state }, payload) {
+
+  var path = ''
+
+  var data = {
+    interesses: payload,
+  }
+
+  return axios({
+    method: 'POST',
+    url: path,
+    data: data,
+    headers: {
+      "Content-Type": "application/json",
+    }
+  }).then(function (response) {
+    Notify.create({
+      message: 'Iinteresses salvos',
+      timeout: 3000,
+      color: 'positive'
+    })
+
+  }).catch( error => {
+    console.log(error)
+    Notify.create({
+      message: 'Erro ao salvar interesses',
+      timeout: 3000,
+      color: 'negative'
+    })
+    return error
+  })
+
+}
+
 export function saveProfile ({ commit, state }, payload) {
   // axios
   var token = state.currentUser.token
