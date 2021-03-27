@@ -22,6 +22,25 @@
     >
       <q-list>
 
+        <q-item clickable v-ripple @click="onInteresses">
+          <q-item-section avatar>
+            <q-icon name="bookmark" />
+          </q-item-section>
+
+          <q-item-section>
+            Interesses
+          </q-item-section>
+        </q-item>
+        <q-item clickable v-ripple @click="onOrcamento">
+          <q-item-section avatar>
+            <q-icon name="local_atm" />
+          </q-item-section>
+
+          <q-item-section>
+            Orçamento
+          </q-item-section>
+        </q-item>
+
       </q-list>
     </q-drawer>
 
@@ -37,6 +56,14 @@ import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   name: 'MainLayout',
+  methods: {
+    onInteresses() {
+      this.$router.replace({ name: 'interesses'})
+    },
+    onOrcamento() {
+      this.$router.replace({ name: 'orcamento'})
+    }
+  },
   setup () {
     const leftDrawerOpen = ref(false)
 

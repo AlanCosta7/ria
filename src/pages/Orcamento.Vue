@@ -27,13 +27,14 @@
     </q-list>
     </q-card>
       <div class="width-full row justify-center absolute-bottom q-my-xl">
-        <q-btn color="primary" icon="check" label="Salvar" @click="onSalvar" />
+        <q-btn color="accent" rounded class="q-px-xl" icon-right="chevron_right"  label="Próximo" @click="onProximo" />
       </div>
   </q-page>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
+import { LocalStorage } from 'quasar'
 
 export default {
   name: "PageOrçamento",
@@ -43,23 +44,26 @@ export default {
     }
   },
   methods: {
-    onSelectInteresse(item) {
-      if (this.interesses.includes(item)) {
-        var index = this.interesses.indexOf(item)
-        this.interesses.splice(index, 1)
+    onProximo() {
+
+      if (this.currentUser) {
+
+        this.$store.dispatch("salvarInteresses", this.orcamento)
+        this.$router.replace({ name: 'viagens'})
+
       } else {
-        this.interesses.push(item)
+
+        LocalStorage.set('orcamento', this.orcamento)
+        this.$router.replace({ name: 'viagens'})
+
       }
-    },
-    onSalvar() {
-      this.$store.dispatch("salvarInteresses", this.interesses);
+
     }
   },
   computed: {
     ...mapGetters({
       currentUser: "currentUser",
-      err: "err",
-      tags: "tags",
+      err: "err"
     }),
   },
   mounted() {},

@@ -62,8 +62,7 @@ export default {
   computed: {
     ...mapGetters({
       currentUser: "currentUser",
-      err: "err",
-      tags: "tags",
+      err: "err"
     }),
   },
   mounted() {},

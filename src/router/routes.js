@@ -11,7 +11,7 @@ const routes = [
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/Index.vue') },
+      { path: '', name: 'interesses', component: () => import('pages/Index.vue') },
       { path: 'orcamento', name: 'orcamento', component: () => import('pages/Orcamento.vue') },
       { path: 'viagens', name: 'viagens', component: () => import('pages/Viagens.vue') },
       { path: 'rotas', name: 'rotas', component: () => import('pages/Rotas.vue') },

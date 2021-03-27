@@ -22,13 +22,14 @@
       </div>
     </q-card>
       <div class="width-full row justify-center absolute-bottom q-my-xl">
-        <q-btn color="primary" icon="check" label="Salvar" @click="onSalvar" />
+        <q-btn color="accent" rounded class="q-px-xl" icon-right="chevron_right"  label="Próximo" @click="onProximo" />
       </div>
   </q-page>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
+import { LocalStorage } from 'quasar'
 
 export default {
   name: "PageTags",
@@ -46,8 +47,22 @@ export default {
         this.interesses.push(item)
       }
     },
-    onSalvar() {
-      this.$store.dispatch("salvarInteresses", this.interesses);
+    login() {
+    },
+    onProximo() {
+
+      if (this.currentUser) {
+
+        this.$store.dispatch("salvarInteresses", this.interesses)
+        this.$router.replace({ name: 'orcamento'})
+
+      } else {
+
+        LocalStorage.set('interesses', this.interesses)
+        this.$router.replace({ name: 'orcamento'})
+
+      }
+
     }
   },
   computed: {
