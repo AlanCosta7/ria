@@ -48,7 +48,7 @@ export default {
 
       if (this.currentUser) {
 
-        this.$store.dispatch("salvarInteresses", this.orcamento)
+        this.$store.dispatch("salvarInteresses", { budget: this.orcamento })
         this.$router.replace({ name: 'viagens'})
 
       } else {

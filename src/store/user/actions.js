@@ -2,9 +2,8 @@ import axios from 'axios'
 import { LocalStorage } from 'quasar'
 import { Notify } from 'quasar'
 
-export function signInWithEmailAndPassword ({ dispatch, commit }, payload) {
-  console.log('signInWithEmailAndPassword', payload)
-    var path = ''
+export function signInWithEmailAndPassword ({ commit }, payload) {
+    var path = 'https://ria-back.herokuapp.com/auth/users/login'
 
     return axios({
       url: path,
@@ -14,22 +13,23 @@ export function signInWithEmailAndPassword ({ dispatch, commit }, payload) {
         password: payload.password
       },
     }).then(function (response) {
+
       if (response.status == "200") {
-        commit('setCurrentUser', response.data)
-        var data = {
-          token: response.data.token,
-          type: response.data.type
-        }
+        commit('setCurrentUser', response.data.user)
+        var data = response.data.user
+
         LocalStorage.set('user', data)
-        return response.data
+        return true
       }
     }).catch( error => {
-      console.log(error)
+      console.log('error user', error)
       Notify.create({
         message: 'Senha inválida ou usuário não existe',
         timeout: 3000,
         color: 'negative'
       })
+      return false
+
     })
 
 }
@@ -37,7 +37,7 @@ export function signInWithEmailAndPassword ({ dispatch, commit }, payload) {
 export function createUserWithEmailAndPassword ({ commit, state }, payload) {
   console.log('createUserWithEmailAndPassword', payload)
 
-  var path = ''
+  var path = 'https://ria-back.herokuapp.com/auth/users/register'
 
   var data = {
     email: payload.email,
@@ -74,24 +74,92 @@ export function createUserWithEmailAndPassword ({ commit, state }, payload) {
 }
 
 
-export function salvarInteresses({ commit, state }, payload) {
-
-  var path = ''
-
-  var data = {
-    interesses: payload,
-  }
+export function signInWithEmailAndPasswordProviders ({ commit }, payload) {
+  var path = 'https://ria-back.herokuapp.com/auth/providers/login'
 
   return axios({
-    method: 'POST',
     url: path,
-    data: data,
+    method: 'POST',
+    data: {
+      email: payload.email,
+      password: payload.password
+    },
+  }).then(function (response) {
+
+    if (response.status == "200") {
+      commit('setCurrentUser', response.data.user)
+      var data = response.data.user
+
+      LocalStorage.set('user', data)
+      return true
+    }
+  }).catch( error => {
+    console.log('error user', error)
+    Notify.create({
+      message: 'Senha inválida ou usuário não existe',
+      timeout: 3000,
+      color: 'negative'
+    })
+    return false
+
+  })
+
+}
+
+export function createUserWithEmailAndPasswordProviders ({ commit, state }, payload) {
+console.log('createUserWithEmailAndPassword', payload)
+
+var path = 'https://ria-back.herokuapp.com/auth/providers/register'
+
+var data = {
+  email: payload.email,
+  password: payload.password
+}
+
+return axios({
+  method: 'POST',
+  url: path,
+  data: data,
+  headers: {
+    "Content-Type": "application/json",
+  }
+}).then(function (response) {
+  if (response.status == "201") {
+    commit('setCurrentUser', response.data)
+    var data = {
+      token: response.data.token,
+      type: response.data.type
+    }
+    LocalStorage.set('user', data)
+    return response.data
+  }
+}).catch( error => {
+  console.log(error)
+  Notify.create({
+    message: 'Usuário já existe',
+    timeout: 3000,
+    color: 'negative'
+  })
+  return error
+})
+
+}
+
+
+export function salvarInteresses({ commit, state }, payload) {
+
+  var path = 'https://ria-back.herokuapp.com/users'
+
+  return axios({
+    method: 'PUT',
+    url: path,
+    data: payload,
     headers: {
       "Content-Type": "application/json",
     }
   }).then(function (response) {
     Notify.create({
-      message: 'Iinteresses salvos',
+      message: 'Dados salvos com sucesso',
       timeout: 3000,
       color: 'positive'
     })
@@ -99,7 +167,7 @@ export function salvarInteresses({ commit, state }, payload) {
   }).catch( error => {
     console.log(error)
     Notify.create({
-      message: 'Erro ao salvar interesses',
+      message: 'Erro ao salvar dados',
       timeout: 3000,
       color: 'negative'
     })

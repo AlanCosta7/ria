@@ -30,7 +30,8 @@
         </q-timeline>
       </div>
     </q-card>
-      <div class="width-full row justify-center">
+      <div class="width-full q-gutter-md row justify-center">
+        <q-btn color="accent" outline icon="keyboard_arrow_left" label="Voltar" @click="onVoltar" />
         <q-btn color="accent" icon="local_atm" label="Comprar" @click="onSalvar" />
       </div>
   </q-page>
@@ -54,6 +55,9 @@ export default {
       } else {
         this.interesses.push(item);
       }
+    },
+    onVoltar() {
+      this.$router.push({ name: 'viagens'})
     },
     onSalvar() {
       this.$store.dispatch("salvarInteresses", this.interesses);

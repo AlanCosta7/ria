@@ -1,4 +1,9 @@
-export const currentUser = (state) => state.currentUser
+export const currentUser = (state) => {
+  const str = JSON.stringify(state.currentUser)
+  return  JSON.parse(str)
+
+}
+
 export const err = (state) => state.err
 
 export const getLetterUser = state => {

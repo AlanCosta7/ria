@@ -15,7 +15,7 @@
         <q-card-section>
           <div class="row items-center justify-around">
             <div class="text-bold text-positive text-h6">R$1300</div>
-            <div><q-btn color="deep-orange" dense class="q-px-md" label="VER ROTAS" @click="onClick" /></div>
+            <div><q-btn color="deep-orange" dense class="q-px-md" label="VER ROTAS" @click="onViagens(item)" /></div>
           </div>
         </q-card-section>
       </q-card>
@@ -35,13 +35,22 @@ export default {
     }
   },
   methods: {
-    onSelectInteresse(item) {
-      if (this.interesses.includes(item)) {
-        var index = this.interesses.indexOf(item)
-        this.interesses.splice(index, 1)
+    onViagens(item) {
+      if (this.currentUser) {
+
+        this.$store.dispatch("salvarInteresses", item)
+        this.$router.replace({ name: 'rotas'})
+
       } else {
-        this.interesses.push(item)
+
+        this.login()
+
       }
+
+    },
+    login() {
+        this.$router.replace({ name: 'login'})
+
     },
     onSalvar() {
       this.$store.dispatch("salvarInteresses", this.interesses);

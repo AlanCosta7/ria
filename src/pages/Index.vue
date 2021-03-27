@@ -53,7 +53,7 @@ export default {
 
       if (this.currentUser) {
 
-        this.$store.dispatch("salvarInteresses", this.interesses)
+        this.$store.dispatch("salvarInteresses", { tags: this.interesses })
         this.$router.replace({ name: 'orcamento'})
 
       } else {

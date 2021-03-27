@@ -10,7 +10,7 @@
         v-model="tab"
         dense
         class="text-black text-bold width-full absolute-bottom"
-        indicator-color="accent"
+        indicator-color="secondary"
         align="justify"
         narrow-indicator
       >
@@ -35,7 +35,7 @@
                 id="email"
                 type="email"
                 dense
-                color="accent"
+                color="secondary"
                 v-model="email"
                 label="Email"
                 lazy-rules
@@ -46,7 +46,7 @@
                 class="col-10"
                 dense
                 bottom-slots
-                color="accent"
+                color="secondary"
                 :type="typePass"
                 v-model="password"
                 label="Senha"
@@ -63,7 +63,7 @@
                 </template>
               </q-input>
               <div class="column row justify-center fit">
-               <q-btn color="accent"  class="full-width" type="submit" rounded label="Acessar"></q-btn>
+               <q-btn color="secondary"  class="full-width" type="submit" rounded label="Acessar"></q-btn>
                 <!-- <div class="q-ma-md text-center"> OU </div>
                 <q-btn color="primary" class="full-width" @click="acessarGoogle" rounded label="Acessar com gmail"></q-btn> -->
               </div>
@@ -83,7 +83,7 @@
                 id="email"
                 type="email"
                 dense
-                color="accent"
+                color="secondary"
                 v-model="email"
                 label="Email"
                 lazy-rules
@@ -94,7 +94,7 @@
                 class="col-10"
                 dense
                 bottom-slots
-                color="accent"
+                color="secondary"
                 :type="typePass"
                 v-model="password"
                 label="Senha"
@@ -115,7 +115,7 @@
                 class="col-10"
                 dense
                 bottom-slots
-                color="accent"
+                color="secondary"
                 :type="typePass"
                 v-model="confirmarSenha"
                 label="Confirmar Senha"
@@ -137,14 +137,14 @@
                 </template>
               </q-input>
               <div class="column row justify-center">
-               <q-btn color="accent" rounded class="q-my-md" style="width:200px" type="submit" label="Cadastrar"></q-btn>
+               <q-btn color="secondary" rounded class="q-my-md" style="width:200px" type="submit" label="Cadastrar"></q-btn>
               </div>
             </q-form>
         </q-tab-panel>
       </q-tab-panels>
     </q-card>
     <div>
-      <q-btn color="accent" flat label="Para Empresas" @click="onEmpresas" />
+      <q-btn color="secondary" flat label="Para Viajantes" @click="onUsuario" />
     </div>
   </q-page>
 </template>
@@ -154,8 +154,8 @@ import Vuex from "vuex";
 import { Loading, LocalStorage } from "quasar";
 
 export default {
-  name: "PageLogin",
-  meta: { title: "Ria - Login" },
+  name: "PageLoginEmpresas",
+  meta: { title: "RIA - Login" },
   data() {
     return {
       setLogin: true,
@@ -165,16 +165,10 @@ export default {
       iconVisibility: "visibility",
       email: null,
       password: null,
-      confirmPassword: null,
+      confirmarSenha: null,
     };
   },
   watch: {
-    currentUser(newUser, oldUser) {
-
-      if (newUser) {
-        this.redirectToApp(3000);
-      }
-    },
     visibility(val) {
       if (!val) {
         this.typePass = "text";
@@ -192,21 +186,14 @@ export default {
     }),
   },
   mounted() {
-    var user = LocalStorage.getItem('user')
-    this.$store.commit('setCurrentUser', user)
-
     if (this.currentUser) {
-      const rediretDelay = 3000;
-      this.redirectToApp(rediretDelay);
-    } else {
-      this.$router.push({
-        name: "login"
-      });
+        this.$store.dispatch("loadUser");
+        this.$store.dispatch("loadUserEmpresa");
     }
   },
   methods: {
-    onEmpresas() {
-      this.$router.push('empresas')
+    onUsuario() {
+        this.$router.replace({ name: 'login'})
     },
     emailValida(val) {
       return new Promise((resolve, reject) => {
@@ -240,7 +227,7 @@ export default {
         email: email,
         password: password,
       };
-      this.$store.dispatch("signInWithEmailAndPassword", value).then( (result) => {
+      this.$store.dispatch("signInWithEmailAndPasswordProviders", value).then( (result) => {
 
           if(result) {
             Loading.hide();
@@ -261,7 +248,7 @@ export default {
         password: password,
       };
       this.$store
-        .dispatch("createUserWithEmailAndPassword", value)
+        .dispatch("createUserWithEmailAndPasswordProviders", value)
         .then( result => {
 
           if(result) {
@@ -278,22 +265,7 @@ export default {
     },
     handleResetPassword() {
       this.$store.dispatch("handleResetPassword");
-    },
-    redirectToApp(redirectDelay) {
-      console.log(this.currentUser)
-      const email = this.currentUser.email
-
-      Loading.show();
-      if (email) {
-        setTimeout(() => {
-          this.$router.push({
-            name: "interesses"
-          });
-
-          Loading.hide();
-        }, redirectDelay);
-      }
-    },
+    }
   },
 };
 </script>
