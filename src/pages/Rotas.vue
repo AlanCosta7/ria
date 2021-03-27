@@ -5,15 +5,34 @@
         class="full-width bg-white text-h2 text-bold row wrap justify-center items-start content-center relative-position"
         style="height: 150px; border-radius: 0 0 30px 30px"
       >
-        Interesses
+        Rotas
       </div>
       <div class="row q-gutter-md q-ma-md">
+        <q-timeline color="deep-orange">
+          <q-timeline-entry title="Partida" class="">
+            <div>
+             9h -  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+            </div>
+          </q-timeline-entry>
 
-      </div>
-      <div class="width-full row justify-center">
-        <q-btn color="primary" icon="check" label="Salvar" @click="onSalvar" />
+
+          <q-timeline-entry title="Parada 1" class="">
+            <div>
+             12h -  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+            </div>
+          </q-timeline-entry>
+
+          <q-timeline-entry title="Chegada" class="">
+            <div>
+             17h -  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+            </div>
+          </q-timeline-entry>
+        </q-timeline>
       </div>
     </q-card>
+      <div class="width-full row justify-center">
+        <q-btn color="accent" icon="local_atm" label="Comprar" @click="onSalvar" />
+      </div>
   </q-page>
 </template>
 
@@ -24,21 +43,21 @@ export default {
   name: "PageIndex",
   data() {
     return {
-      interesses: []
-    }
+      interesses: [],
+    };
   },
   methods: {
     onSelectInteresse(item) {
       if (this.interesses.includes(item)) {
-        var index = this.interesses.indexOf(item)
-        this.interesses.splice(index, 1)
+        var index = this.interesses.indexOf(item);
+        this.interesses.splice(index, 1);
       } else {
-        this.interesses.push(item)
+        this.interesses.push(item);
       }
     },
     onSalvar() {
       this.$store.dispatch("salvarInteresses", this.interesses);
-    }
+    },
   },
   computed: {
     ...mapGetters({

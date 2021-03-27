@@ -20,10 +20,10 @@
         </div>
       </q-list>
       </div>
+    </q-card>
       <div class="width-full row justify-center absolute-bottom q-my-xl">
         <q-btn color="primary" icon="check" label="Salvar" @click="onSalvar" />
       </div>
-    </q-card>
   </q-page>
 </template>
 
