@@ -5,25 +5,30 @@
         class="full-width bg-white text-h2 text-bold row wrap justify-center items-start content-center relative-position"
         style="height: 300px; border-radius: 0 0 30px 30px"
       >
-        Interesses
+        Orçamento
+        <div class="text-positive q-mt-md">R${{orcamento}}</div>
       </div>
-      <div class="row q-gutter-md q-ma-md">
-      <q-list v-for="(item, index) in tags" :key="index" class="row">
-        <div class=" " style="max-width: 300px">
-          <q-btn
-            :color="interesses.includes(item) ? 'accent' : 'black' "
-            :outline="interesses.includes(item) ? false : true "
-            rounded
-            :label="item"
-            @click="onSelectInteresse(item)"
-          />
-        </div>
-      </q-list>
-      </div>
-      <div class="width-full row justify-center">
+    <q-list dense class="fit q-pa-md q-my-xl">
+        <q-item>
+          <q-item-section avatar>
+            <q-icon color="accent" size="xl" name="local_atm" />
+          </q-item-section>
+          <q-item-section>
+            <q-slider
+              class="width-full"
+              v-model="orcamento"
+              :min="500"
+              :max="20000"
+              :step="100"
+              color="accent"
+            />
+          </q-item-section>
+        </q-item>
+    </q-list>
+    </q-card>
+      <div class="width-full row justify-center absolute-bottom q-my-xl">
         <q-btn color="primary" icon="check" label="Salvar" @click="onSalvar" />
       </div>
-    </q-card>
   </q-page>
 </template>
 
@@ -31,10 +36,10 @@
 import { mapGetters } from "vuex";
 
 export default {
-  name: "PageIndex",
+  name: "PageOrçamento",
   data() {
     return {
-      interesses: []
+      orcamento: 500
     }
   },
   methods: {

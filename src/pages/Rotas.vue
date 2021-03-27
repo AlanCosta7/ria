@@ -3,22 +3,12 @@
     <q-card flat class="bg-grey-2" style="max-width: 400px; width: 100vw">
       <div
         class="full-width bg-white text-h2 text-bold row wrap justify-center items-start content-center relative-position"
-        style="height: 300px; border-radius: 0 0 30px 30px"
+        style="height: 150px; border-radius: 0 0 30px 30px"
       >
         Interesses
       </div>
       <div class="row q-gutter-md q-ma-md">
-      <q-list v-for="(item, index) in tags" :key="index" class="row">
-        <div class=" " style="max-width: 300px">
-          <q-btn
-            :color="interesses.includes(item) ? 'accent' : 'black' "
-            :outline="interesses.includes(item) ? false : true "
-            rounded
-            :label="item"
-            @click="onSelectInteresse(item)"
-          />
-        </div>
-      </q-list>
+
       </div>
       <div class="width-full row justify-center">
         <q-btn color="primary" icon="check" label="Salvar" @click="onSalvar" />
