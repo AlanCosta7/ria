@@ -8,7 +8,7 @@
         Viagens
       </div>
       <div class="fit row justify-center">
-        <div class="q-mt-xl">
+        <div v-show="listPackages.length == 0" class="q-mt-xl">
           <q-img
             src="../assets/empty.svg"
             :ratio="1"
@@ -18,7 +18,7 @@
             spinner-size="82px"
           />
         </div>
-        <q-list v-if="listPackages.length > 0" dense class="fit q-pa-md q-my-xl" style="max-width: 600px" v-for="(item, index) in listPackages" :key="index">
+        <q-list v-show="listPackages.length > 0" dense class="fit q-pa-md q-my-xl" style="max-width: 600px" v-for="(item, index) in listPackages" :key="index">
           <q-card>
               <q-img
                 :src="item.image"

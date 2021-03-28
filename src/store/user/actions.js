@@ -159,7 +159,7 @@ return axios({
 
 
 export function salvarInteresses({ commit, state }, payload) {
-  console.log(state.token)
+  console.log(payload)
   var token = state.token
   var path = 'https://ria-back.herokuapp.com/users'
   return axios({
@@ -229,18 +229,17 @@ export function getPackagesAuth ({ commit, state }) {
 
 export function getPackages ({ commit, state }, payload) {
   // axios
-
-    var path = "https://ria-back.herokuapp.com/packages"
+    var path = "https://ria-back.herokuapp.com/packages/match"
 
     return axios({
-      method: 'GET',
+      method: 'POST',
       url: path,
       data: payload,
       headers: {
         "Content-Type": "application/json",
       }
     }).then(function (response) {
-      console.log(response)
+      console.log('getPackages', response)
       if (response.status == "200") {
         commit('setListPackages', response.data)
       }

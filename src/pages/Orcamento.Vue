@@ -57,7 +57,7 @@ export default {
   methods: {
     onProximo() {
       if (this.currentUser) {
-        var budget = this.orcamento * 100;
+        var budget = this.orcamento*100;
         this.$store
           .dispatch("salvarInteresses", { budget: budget })
           .then((result) => {
@@ -71,7 +71,8 @@ export default {
             console.log(error);
           });
       } else {
-        LocalStorage.set("orcamento", this.orcamento);
+        var budget = this.orcamento*100;
+        LocalStorage.set("orcamento", budget);
         this.$router.replace({ name: "viagens" });
       }
     },
@@ -85,7 +86,7 @@ export default {
   mounted() {
     var orcamento = LocalStorage.getItem("orcamento");
     if (orcamento) {
-      this.orcamento = orcamento;
+      this.orcamento = orcamento/100;
     }
   }
 }
