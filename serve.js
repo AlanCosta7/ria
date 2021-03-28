@@ -1,15 +1,16 @@
 const express = require("express")
 const cors = require("cors")
-//const path = require('path')
-// const htmlpath = path.resolve('dist/pwa')
+const path = require('path')
+const htmlpath = path.resolve(__dirname, 'dist', 'pwa')
 const app = express()
 app.use(cors())
 
-app.use(express.static('dist/pwa'))
+app.use(express.static(htmlpath))
 
-app.get('/*', (req, res) => {
-  res.sendFile('dist/pwa/index.html')
-})
+// app.get('/*', (req, res) => {
+//   console.log(htmlpath)
+//   res.sendFile(htmlpath)
+// })
 const port = process.env.PORT || 9000
 
 app.listen(port)
