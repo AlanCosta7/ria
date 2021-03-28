@@ -257,6 +257,35 @@ export function getPackages ({ commit, state }, payload) {
 }
 
 
+export function getPoints ({ commit, state }, payload) {
+  // axios
+    console.log('getPoints', payload)
+
+    var path = `https://ria-back.herokuapp.com/packages/${payload}`
+
+    return axios({
+      method: 'GET',
+      url: path,
+      headers: {
+        "Content-Type": "application/json",
+      }
+    }).then(function (response) {
+      console.log(response)
+      if (response.status == "200") {
+        commit('setListPoints', response.data)
+      }
+    }).catch( error => {
+      console.log(error)
+      Notify.create({
+        position: 'top',
+        message: 'Erro ao carregar dados da viagem',
+        timeout: 3000,
+        color: 'negative'
+      })
+      return false
+    })
+}
+
 
 export function saveProfile ({ commit, state }, payload) {
   // axios

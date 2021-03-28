@@ -20,3 +20,5 @@ export const token = (state) => state.token
 export const listPackages = (state) => state.listPackages
 
 export const selectViagem = (state) => state.selectViagem
+
+export const listPoints = (state) => state.listPoints

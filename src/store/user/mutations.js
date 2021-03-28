@@ -29,3 +29,7 @@ export const setListPackages = (state, payload) => {
 export const setSelectViagem = (state, payload) => {
   state.selectViagem = payload
 };
+
+export const setListPoints = (state, payload) => {
+  state.listPoints = payload
+};

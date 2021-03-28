@@ -3,6 +3,7 @@ export default function () {
     currentUser: null,
     token: null,
     selectViagem: null,
+    listPoints: [],
     user: {
       email: '',
       cpf: '',

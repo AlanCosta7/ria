@@ -59,16 +59,9 @@ export default {
       this.$router.replace({ name: 'orcamento'})
     },
     onViagens(item) {
-      if (this.currentUser) {
 
-        this.$store.commit("setSelectViagem",item)
-        this.$router.replace({ name: 'rotas'})
-
-      } else {
-
-        this.login()
-
-      }
+      this.$store.commit("setSelectViagem",item._id)
+      this.$router.replace({ name: 'rotas'})
 
     },
     login() {

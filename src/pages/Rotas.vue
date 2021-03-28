@@ -2,10 +2,10 @@
   <q-page class="bg-grey-2">
     <q-card flat class="bg-grey-2" style="width: 100vw">
       <div
-        class="full-width bg-white text-h2 text-bold row wrap justify-center items-start content-center relative-position"
+        class="full-width bg-white text-h4 text-bold row wrap justify-center items-start content-center relative-position"
         style="height: 150px; border-radius: 0 0 30px 30px"
       >
-        Rotas
+        {{listPoints.name}}
       </div>
       <div class="width-full row justify-center q-ma-md">
         <q-btn color="deep-orange" flat icon="share" label="Compartilhar" @click="onShare" />
@@ -13,24 +13,14 @@
       </div>
       <div class="row width-full justify-center q-ma-md">
         <q-timeline color="deep-orange" style="max-width: 600px">
-          <q-timeline-entry title="Partida" class="">
-            <div>
-             9h -  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-            </div>
+          <div v-for="(item, index) in listPoints.points" :key="index">
+          <q-timeline-entry
+            :title="item.title"
+            :body="item.description"
+            :subtitle="item.date"
+          >
           </q-timeline-entry>
-
-
-          <q-timeline-entry title="Parada 1" class="">
-            <div>
-             12h -  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-            </div>
-          </q-timeline-entry>
-
-          <q-timeline-entry title="Chegada" class="">
-            <div>
-             17h -  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-            </div>
-          </q-timeline-entry>
+          </div>
         </q-timeline>
       </div>
     </q-card>
@@ -74,8 +64,13 @@ export default {
     ...mapGetters({
       currentUser: "currentUser",
       selectViagem: "selectViagem",
+      listPoints: "listPoints",
       err: "err"
     }),
+  },
+  mounted() {
+
+      this.$store.dispatch("getPoints", this.selectViagem)
   },
 };
 </script>
