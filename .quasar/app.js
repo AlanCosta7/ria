@@ -45,8 +45,11 @@ export default async function (createAppFn) {
   const app = createAppFn(RootComponent)
 
   
+<<<<<<< HEAD
   app.config.devtools = true
   
+=======
+>>>>>>> origin/deploy
 
   app.use(Quasar, quasarUserOptions)
 
