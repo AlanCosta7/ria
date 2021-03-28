@@ -7,7 +7,7 @@
   "private": true,
   "scripts": {
     "start": "quasar dev",
-    "prod": "node serve.js && quasar dev -m pwa",
+    "prod": "node serve.js",
     "start:pwa": "quasar dev -m pwa",
     "build": "quasar build -m pwa",
     "test": "echo \"No test specified\" && exit 0"
