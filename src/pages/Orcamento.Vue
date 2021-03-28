@@ -5,11 +5,11 @@
         class="full-width bg-white text-h2 text-bold row wrap justify-center items-start content-center relative-position"
         style="height: 300px; border-radius: 0 0 30px 30px"
       >
-        Orçamento
-        <div class="text-positive q-mt-md">R${{orcamento}}</div>
+       <div class="col-12 text-center">Orçamento</div>
+        <div class="text-positive col-12 text-center q-mt-md">R${{orcamento}}</div>
       </div>
-      <div>
-        <q-list dense class="fit q-pa-md q-my-xl">
+      <div class="fit row justify-center">
+        <q-list dense class="fit q-pa-md q-my-xl" style="max-width: 600px">
             <q-item>
               <q-item-section avatar>
                 <q-icon color="accent" size="xl" name="local_atm" />

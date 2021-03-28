@@ -1,14 +1,14 @@
 <template>
   <q-page class="bg-grey-2">
-    <q-card flat class="bg-grey-2" style="max-width: 400px; width: 100vw">
+    <q-card flat class="bg-grey-2" style="width: 100vw">
       <div
         class="full-width bg-white text-h2 text-bold row wrap justify-center items-start content-center relative-position"
         style="height: 150px; border-radius: 0 0 30px 30px"
       >
         Rotas
       </div>
-      <div class="row q-gutter-md q-ma-md">
-        <q-timeline color="deep-orange">
+      <div class="row width-full justify-center q-ma-md">
+        <q-timeline color="deep-orange" style="max-width: 600px">
           <q-timeline-entry title="Partida" class="">
             <div>
              9h -  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
@@ -30,7 +30,7 @@
         </q-timeline>
       </div>
     </q-card>
-      <div class="width-full q-gutter-md row justify-center">
+      <div class="width-full q-gutter-md row justify-center" >
         <q-btn color="accent" outline icon="keyboard_arrow_left" label="Voltar" @click="onVoltar" />
         <q-btn color="accent" icon="local_atm" label="Comprar" @click="onSalvar" />
       </div>
