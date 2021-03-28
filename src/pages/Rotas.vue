@@ -2,10 +2,28 @@
   <q-page class="bg-grey-2">
     <q-card flat class="bg-grey-2" style="width: 100vw">
       <div
-        class="full-width bg-white text-h4 text-bold row wrap justify-center items-start content-center relative-position"
-        style="height: 150px; border-radius: 0 0 30px 30px"
+        class="full-width relative-position"
+        style="max-height: 180px; border-radius: 0 0 30px 30px"
       >
-        {{listPoints.name}}
+        <q-img
+          :src="listPoints.image"
+          width="100%"
+          height="180px"
+          spinner-color="primary"
+          spinner-size="82px"
+          style="border-radius: 0 0 30px 30px"
+        >
+          <div class="absolute-full text-h4 text-bold flex flex-center">
+            {{listPoints.name}}
+          </div>
+
+      <template v-slot:error>
+        <div class="absolute-full text-h4 text-bold flex flex-center bg-white text-black">
+          {{listPoints.name}}
+        </div>
+      </template>
+        </q-img>
+
       </div>
       <div class="width-full row justify-center q-ma-md">
         <q-btn color="deep-orange" flat icon="share" label="Compartilhar" @click="onShare" />

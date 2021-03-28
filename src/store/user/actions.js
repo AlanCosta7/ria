@@ -239,6 +239,7 @@ export function getPackages ({ commit, state }, payload) {
         "Content-Type": "application/json",
       }
     }).then(function (response) {
+      console.log('getPackages', response)
       if (response.status == "200") {
         commit('setListPackages', response.data)
       }

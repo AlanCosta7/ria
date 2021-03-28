@@ -28,18 +28,27 @@
                 spinner-size="82px"
               >
 
+                <div class="absolute-full flex flex-center text-bold text-h5 text-center text-white">
+                  {{item.name}}
+                </div>
               <template v-slot:error>
-                <div class="absolute-full flex flex-center bg-negative text-white">
-                  Imagem não encontrada
+                <div class="absolute-full flex flex-center text-bold text-h5 text-center bg-white text-black">
+                  {{item.name}}
                 </div>
               </template>
               </q-img>
             <q-card-section>
-              <div class="text-bold text-h5 text-center">{{item.name}}</div>
-            </q-card-section>
-            <q-card-section>
               <div class="row width-full items-center justify-around">
                 <div class="text-bold col-6 text-positive text-h6">R${{item.price/100}}</div>
+                <div>
+                  <q-knob
+                    show-value
+                    class="text-secondary q-ma-md"
+                    v-model="item.tagMatches"
+                    size="50px"
+                    color="light-blue"
+                  />
+                </div>
                 <div class="col-6"><q-btn color="deep-orange" class="q-px-md" dense label="VER ROTAS" @click="onViagens(item)" /></div>
               </div>
             </q-card-section>
