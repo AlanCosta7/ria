@@ -8,12 +8,12 @@ const app = express()
 
 // app.use(cors())
 
-app.use(serveStatic(htmlpath))
+app.use('/', serveStatic(path.join(__dirname, '/dist/pwa')))
 
-// app.get('/*', (req, res) => {
-//   console.log(htmlpath)
-//   res.sendFile(htmlpath)
-// })
+app.get('/*/', function (req, res) {
+	res.sendFile(path.join(__dirname, '/dist/pwa/index.html'))
+})
+
 const port = process.env.PORT || 9000
 
 app.listen(port)
