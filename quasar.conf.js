@@ -20,7 +20,13 @@ module.exports = configure(function (/* ctx */) {
     // --> boot files are part of "main.js"
     // https://v2.quasar.dev/quasar-cli/boot-files
     boot: [
+<<<<<<< HEAD
+      'axios'
+=======
+      'i18n',
       'axios',
+      'vue-browser-geolocation'
+>>>>>>> origin/deploy
     ],
 
     // https://v2.quasar.dev/quasar-cli/quasar-conf-js#Property%3A-css
@@ -72,7 +78,7 @@ module.exports = configure(function (/* ctx */) {
     // Full list of options: https://v2.quasar.dev/quasar-cli/quasar-conf-js#Property%3A-devServer
     devServer: {
       https: false,
-      port: 8080,
+      port: process.env.PORT || 8080,
       open: true // opens browser window automatically
     },
 
@@ -196,6 +202,8 @@ module.exports = configure(function (/* ctx */) {
 
         appId: 'ria'
       },
+
+      nodeIntegration: true,
 
       // "chain" is a webpack-chain object https://github.com/neutrinojs/webpack-chain
       chainWebpackMain (/* chain */) {
