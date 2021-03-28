@@ -1,1 +1,1 @@
-web: quasar dev -m pwa
+web: node serve.js
