@@ -21,7 +21,7 @@
           />
         </div>
         <q-space />
-        <div class="q-pa-md q-gutter-md">
+        <div class="q-pa-md q-gutter-md mobile-hide">
             <q-btn flat color="black" dense @click="onInteresses" label="Interesses" icon="star" />
             <q-btn flat color="black" dense @click="onOrcamento" label="Orçamento" icon="local_atm" class="q-mr-xs" />
             <q-btn flat color="black" dense @click="onViagen" label="Viagens" icon="flight" />
@@ -35,8 +35,17 @@
       bordered
       class="bg-grey-1 mobile-only"
     >
+        <div class="q-mb-xl q-pa-md">
+          <q-img
+            src="../assets/logo.svg"
+            width="100%"
+            spinner-color="primary"
+            spinner-size="82px"
+          />
+        </div>
       <q-list>
 
+        <q-separator  />
         <q-item clickable v-ripple @click="onInteresses">
           <q-item-section avatar>
             <q-icon name="star" />
@@ -46,6 +55,7 @@
             Interesses
           </q-item-section>
         </q-item>
+        <q-separator  />
         <q-item clickable v-ripple @click="onOrcamento">
           <q-item-section avatar>
             <q-icon name="local_atm" />
@@ -55,6 +65,7 @@
             Orçamento
           </q-item-section>
         </q-item>
+        <q-separator  />
         <q-item clickable v-ripple @click="onViagen">
           <q-item-section avatar>
             <q-icon name="flight" />
@@ -64,6 +75,7 @@
             Viagens
           </q-item-section>
         </q-item>
+        <q-separator  />
 
       </q-list>
     </q-drawer>
@@ -71,7 +83,7 @@
     <q-page-container>
       <router-view />
     </q-page-container>
-    <q-footer class="bg-white row items-center q-pa-md" reveal bordered>
+    <q-footer class="bg-white row items-center q-pa-md mobile-hide" reveal bordered>
       <div>
       <q-img
         src="../assets/logo.svg"
