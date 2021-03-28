@@ -1,7 +1,7 @@
 const express = require("express")
 const cors = require("cors")
 const path = require('path')
-const htmlpath = path.resolve(__dirname, '..', 'dist', 'pwa')
+const htmlpath = path.resolve(__dirname, '..', 'dist', 'pwa', 'index.html')
 const app = express()
 app.use(cors())
 
