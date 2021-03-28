@@ -6,9 +6,11 @@
   "author": "alanpc7 <alanpc7@gmail.com>",
   "private": true,
   "scripts": {
-    "test": "echo \"No test specified\" && exit 0",
-    "start": "node serve.js",
-    "build": "quasar build -m pwa"
+    "start": "quasar dev",
+    "prod": "node serve.js && quasar dev -m pwa",
+    "start:pwa": "quasar dev -m pwa",
+    "build": "quasar build -m pwa",
+    "test": "echo \"No test specified\" && exit 0"
   },
   "dependencies": {
     "@quasar/extras": "^1.0.0",
