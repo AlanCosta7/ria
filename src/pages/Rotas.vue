@@ -33,6 +33,7 @@
 
 <script>
 import { mapGetters } from "vuex";
+import { openURL } from 'quasar'
 
 export default {
   name: "PageIndex",
@@ -66,6 +67,20 @@ export default {
     },
     onShare() {
 
+      if(window) {
+        var url = window.location.href
+        if (window.navigator.share !== undefined) {
+          window.navigator.share({
+            title: this.listPoints.name,
+            url: url,
+          })
+          .then(() => console.log('Successful share'))
+          .catch((error) => console.log('Error sharing', error));
+        } else {
+          openURL(`https://api.whatsapp.com/send?text=${url}`);
+        }
+      }
+
     }
   },
   computed: {
@@ -77,7 +92,8 @@ export default {
     }),
   },
   mounted() {
-
+      var id = this.$route.params.id
+      this.$store.commit("setSelectViagem", id)
       this.$store.dispatch("getPoints", this.selectViagem)
   },
 };

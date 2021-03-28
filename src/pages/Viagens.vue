@@ -58,7 +58,8 @@ export default {
   name: "PageOrçamento",
   data() {
     return {
-
+      interesses: [],
+      orcamento: null
     }
   },
   methods: {
@@ -71,7 +72,7 @@ export default {
     onViagens(item) {
 
       this.$store.commit("setSelectViagem",item._id)
-      this.$router.replace({ name: 'rotas'})
+      this.$router.replace({ name: 'rotas', params: { id: item._id }})
 
     },
     login() {
@@ -101,15 +102,12 @@ export default {
 
     if(this.currentUser) {
       this.$store.dispatch("getPackagesAuth")
-      console.log('getPackagesAuth')
     } else {
 
       var value = {
         tags: this.interesses,
         budget: this.orcamento
       }
-
-      console.log('getPackages', value)
       this.$store.dispatch("getPackages", value)
 
     }

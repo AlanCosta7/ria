@@ -239,7 +239,6 @@ export function getPackages ({ commit, state }, payload) {
         "Content-Type": "application/json",
       }
     }).then(function (response) {
-      console.log('getPackages', response)
       if (response.status == "200") {
         commit('setListPackages', response.data)
       }
@@ -284,6 +283,35 @@ export function getPoints ({ commit, state }, payload) {
       return false
     })
 }
+
+
+// export function onShare ({ commit, state }, payload) {
+//   // axios
+
+//     var path = `https://ria-back.herokuapp.com/packages/${payload}`
+
+//     return axios({
+//       method: 'GET',
+//       url: path,
+//       headers: {
+//         "Content-Type": "application/json",
+//       }
+//     }).then(function (response) {
+//       console.log(response)
+//       if (response.status == "200") {
+//         commit('setSelectViagem', response.data)
+//       }
+//     }).catch( error => {
+//       console.log(error)
+//       Notify.create({
+//         position: 'top',
+//         message: 'Erro ao carregar dados da viagem',
+//         timeout: 3000,
+//         color: 'negative'
+//       })
+//       return false
+//     })
+// }
 
 
 export function saveProfile ({ commit, state }, payload) {

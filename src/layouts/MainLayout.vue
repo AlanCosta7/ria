@@ -129,7 +129,7 @@
 <script>
 
 import { defineComponent, ref } from 'vue'
-import { Loading, LocalStorage } from "quasar";
+import { LocalStorage } from "quasar";
 import { openURL } from 'quasar'
 
 export default defineComponent({
@@ -168,7 +168,6 @@ export default defineComponent({
   created() {
     var user = LocalStorage.getItem('user')
     this.$store.commit('setCurrentUser', user)
-    console.log(user)
     var token = LocalStorage.getItem('token')
     this.$store.commit('setToken', token)
   },
