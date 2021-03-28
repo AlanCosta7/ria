@@ -16,3 +16,7 @@ export const setErr = (state, payload) => {
 export const setGeoLocation = (state, payload) => {
   state.geoLocation = payload
 };
+
+export const setToken = (state, payload) => {
+  state.token = payload
+};

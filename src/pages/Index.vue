@@ -1,24 +1,24 @@
 <template>
   <q-page class="bg-grey-2">
-    <q-card flat class="bg-grey-2" style="max-width: 400px; width: 100vw">
+    <q-card flat class="bg-grey-2" style="width: 100vw">
       <div
         class="full-width bg-white text-h2 text-bold row wrap justify-center items-start content-center relative-position"
         style="height: 300px; border-radius: 0 0 30px 30px"
       >
         Interesses
       </div>
-      <div class="row q-gutter-md q-ma-md">
-      <q-list v-for="(item, index) in tags" :key="index" class="row">
-        <div class=" " style="max-width: 300px">
-          <q-btn
-            :color="interesses.includes(item) ? 'accent' : 'black' "
-            :outline="interesses.includes(item) ? false : true "
-            rounded
-            :label="item"
-            @click="onSelectInteresse(item)"
-          />
-        </div>
-      </q-list>
+      <div class="row flex flex-center q-gutter-md q-ma-md">
+        <q-list v-for="(item, index) in tags" :key="index" class="row">
+          <div class=" " style="max-width: 300px">
+            <q-btn
+              :color="interesses.includes(item) ? 'accent' : 'black' "
+              :outline="interesses.includes(item) ? false : true "
+              rounded
+              :label="item"
+              @click="onSelectInteresse(item)"
+            />
+          </div>
+        </q-list>
       </div>
     </q-card>
       <div class="width-full row justify-center absolute-bottom q-my-xl">
@@ -53,8 +53,14 @@ export default {
 
       if (this.currentUser) {
 
-        this.$store.dispatch("salvarInteresses", { tags: this.interesses })
-        this.$router.replace({ name: 'orcamento'})
+        this.$store.dispatch("salvarInteresses", { tags: this.interesses }).then( result => {
+            console.log(result)
+            if (result) {
+              this.$router.replace({ name: 'orcamento'})
+            }
+        }).catch( error => {
+          console.log(error)
+        })
 
       } else {
 
@@ -72,6 +78,8 @@ export default {
       tags: "tags",
     }),
   },
-  mounted() {},
+  mounted() {
+    this.interesses = LocalStorage.getItem('interesses')
+  },
 };
 </script>

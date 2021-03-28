@@ -69,6 +69,7 @@ export default {
       err: "err"
     }),
   },
-  mounted() {},
+  mounted() {
+  },
 };
 </script>

@@ -16,14 +16,18 @@ export function signInWithEmailAndPassword ({ commit }, payload) {
 
       if (response.status == "200") {
         commit('setCurrentUser', response.data.user)
+        commit('setToken', response.data.token)
+
         var data = response.data.user
 
         LocalStorage.set('user', data)
+        LocalStorage.set('token', response.data.token)
         return true
       }
     }).catch( error => {
       console.log('error user', error)
       Notify.create({
+        position: 'top',
         message: 'Senha inválida ou usuário não existe',
         timeout: 3000,
         color: 'negative'
@@ -53,17 +57,19 @@ export function createUserWithEmailAndPassword ({ commit, state }, payload) {
     }
   }).then(function (response) {
     if (response.status == "201") {
-      commit('setCurrentUser', response.data)
-      var data = {
-        token: response.data.token,
-        type: response.data.type
-      }
+      commit('setCurrentUser', response.data.user)
+      commit('setToken', response.data.token)
+
+      var data = response.data.user
+
       LocalStorage.set('user', data)
-      return response.data
+      LocalStorage.set('token', response.data.token)
+      return true
     }
   }).catch( error => {
     console.log(error)
     Notify.create({
+      position: 'top',
       message: 'Usuário já existe',
       timeout: 3000,
       color: 'negative'
@@ -88,14 +94,18 @@ export function signInWithEmailAndPasswordProviders ({ commit }, payload) {
 
     if (response.status == "200") {
       commit('setCurrentUser', response.data.user)
+      commit('setToken', response.data.token)
+
       var data = response.data.user
 
       LocalStorage.set('user', data)
+      LocalStorage.set('token', response.data.token)
       return true
     }
   }).catch( error => {
     console.log('error user', error)
     Notify.create({
+      position: 'top',
       message: 'Senha inválida ou usuário não existe',
       timeout: 3000,
       color: 'negative'
@@ -125,17 +135,19 @@ return axios({
   }
 }).then(function (response) {
   if (response.status == "201") {
-    commit('setCurrentUser', response.data)
-    var data = {
-      token: response.data.token,
-      type: response.data.type
-    }
+    commit('setCurrentUser', response.data.user)
+    commit('setToken', response.data.token)
+
+    var data = response.data.user
+
     LocalStorage.set('user', data)
-    return response.data
+    LocalStorage.set('token', response.data.token)
+    return true
   }
 }).catch( error => {
   console.log(error)
   Notify.create({
+    position: 'top',
     message: 'Usuário já existe',
     timeout: 3000,
     color: 'negative'
@@ -147,31 +159,36 @@ return axios({
 
 
 export function salvarInteresses({ commit, state }, payload) {
-
+  console.log(state.token)
+  var token = state.token
   var path = 'https://ria-back.herokuapp.com/users'
-
   return axios({
     method: 'PUT',
     url: path,
     data: payload,
     headers: {
-      "Content-Type": "application/json",
+      "Authorization": token,
+      "Content-Type": "application/json"
     }
   }).then(function (response) {
+    console.log(response)
     Notify.create({
+      position: 'top',
       message: 'Dados salvos com sucesso',
       timeout: 3000,
       color: 'positive'
     })
+    return true
 
   }).catch( error => {
     console.log(error)
     Notify.create({
+      position: 'top',
       message: 'Erro ao salvar dados',
       timeout: 3000,
       color: 'negative'
     })
-    return error
+    return false
   })
 
 }
@@ -209,6 +226,7 @@ export function saveProfile ({ commit, state }, payload) {
 
     Notify.create({
       // only required parameter is the message:
+      position: 'top',
       message: 'Erro ao tentar atualizar dados',
       timeout: 3000,
       color: 'negative'
@@ -251,6 +269,7 @@ export function loadUser ({ commit }, payload) {
 
     Notify.create({
       // only required parameter is the message:
+      position: 'top',
       message: 'Erro ao tentar carregar dados',
       timeout: 3000,
       color: 'negative'

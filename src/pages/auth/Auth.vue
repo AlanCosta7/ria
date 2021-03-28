@@ -192,8 +192,6 @@ export default {
     }),
   },
   mounted() {
-    var user = LocalStorage.getItem('user')
-    this.$store.commit('setCurrentUser', user)
 
     if (this.currentUser) {
       const rediretDelay = 3000;

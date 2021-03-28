@@ -186,10 +186,6 @@ export default {
     }),
   },
   mounted() {
-    if (this.currentUser) {
-        this.$store.dispatch("loadUser");
-        this.$store.dispatch("loadUserEmpresa");
-    }
   },
   methods: {
     onUsuario() {

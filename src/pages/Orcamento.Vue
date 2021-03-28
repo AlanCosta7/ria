@@ -1,6 +1,6 @@
 <template>
   <q-page class="bg-grey-2">
-    <q-card flat class="bg-grey-2" style="max-width: 400px; width: 100vw">
+    <q-card flat class="bg-grey-2" style="width: 100vw">
       <div
         class="full-width bg-white text-h2 text-bold row wrap justify-center items-start content-center relative-position"
         style="height: 300px; border-radius: 0 0 30px 30px"
@@ -8,23 +8,25 @@
         Orçamento
         <div class="text-positive q-mt-md">R${{orcamento}}</div>
       </div>
-    <q-list dense class="fit q-pa-md q-my-xl">
-        <q-item>
-          <q-item-section avatar>
-            <q-icon color="accent" size="xl" name="local_atm" />
-          </q-item-section>
-          <q-item-section>
-            <q-slider
-              class="width-full"
-              v-model="orcamento"
-              :min="500"
-              :max="20000"
-              :step="100"
-              color="accent"
-            />
-          </q-item-section>
-        </q-item>
-    </q-list>
+      <div>
+        <q-list dense class="fit q-pa-md q-my-xl">
+            <q-item>
+              <q-item-section avatar>
+                <q-icon color="accent" size="xl" name="local_atm" />
+              </q-item-section>
+              <q-item-section>
+                <q-slider
+                  class="width-full"
+                  v-model="orcamento"
+                  :min="500"
+                  :max="20000"
+                  :step="100"
+                  color="accent"
+                />
+              </q-item-section>
+            </q-item>
+        </q-list>
+      </div>
     </q-card>
       <div class="width-full row justify-center absolute-bottom q-my-xl">
         <q-btn color="accent" rounded class="q-px-xl" icon-right="chevron_right"  label="Próximo" @click="onProximo" />
@@ -47,9 +49,15 @@ export default {
     onProximo() {
 
       if (this.currentUser) {
-
-        this.$store.dispatch("salvarInteresses", { budget: this.orcamento })
-        this.$router.replace({ name: 'viagens'})
+        var budget = this.orcamento * 100
+        this.$store.dispatch("salvarInteresses", { budget: budget }).then( result => {
+            console.log(result)
+            if (result) {
+              this.$router.replace({ name: 'viagens'})
+            }
+        }).catch( error => {
+          console.log(error)
+        })
 
       } else {
 
@@ -66,6 +74,8 @@ export default {
       err: "err"
     }),
   },
-  mounted() {},
-};
+  mounted() {
+    this.orcamento = LocalStorage.getItem('orcamento')
+  }
+}
 </script>

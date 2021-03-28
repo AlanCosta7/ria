@@ -15,4 +15,4 @@ export const geoLocation = (state) => state.geoLocation
 
 export const tags = (state) => state.tags
 
-
+export const token = (state) => state.token

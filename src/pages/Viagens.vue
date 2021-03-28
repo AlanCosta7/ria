@@ -63,6 +63,7 @@ export default {
       tags: "tags",
     }),
   },
-  mounted() {},
+  mounted() {
+  },
 };
 </script>

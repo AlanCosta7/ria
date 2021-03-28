@@ -9,6 +9,7 @@
 <script>
 
 import { defineComponent, ref } from 'vue'
+import { Loading, LocalStorage } from "quasar";
 
 export default defineComponent({
   name: 'MainLayout',
@@ -21,6 +22,13 @@ export default defineComponent({
         leftDrawerOpen.value = !leftDrawerOpen.value
       }
     }
-  }
+  },
+  mounted() {
+    var user = LocalStorage.getItem('user')
+    this.$store.commit('setCurrentUser', user)
+
+    var token = LocalStorage.getItem('token')
+    this.$store.commit('setToken', token)
+  },
 })
 </script>

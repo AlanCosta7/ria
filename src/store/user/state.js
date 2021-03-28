@@ -1,6 +1,7 @@
 export default function () {
   return {
     currentUser: null,
+    token: null,
     user: {
       email: '',
       cpf: '',
