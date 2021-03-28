@@ -1,1 +1,1 @@
-web: yarn prod
+web: quasar dev -m pwa && yarn prod
