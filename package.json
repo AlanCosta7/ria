@@ -6,8 +6,10 @@
   "author": "alanpc7 <alanpc7@gmail.com>",
   "private": true,
   "scripts": {
-    "start": "quasar dev",
+    "postinstall": "npm run build",
+    "start": "node server.js",
     "start:pwa": "quasar dev -m pwa",
+    "build": "quasar build -m pwa",
     "test": "echo \"No test specified\" && exit 0"
   },
   "dependencies": {
