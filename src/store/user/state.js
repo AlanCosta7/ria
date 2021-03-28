@@ -13,10 +13,18 @@ export default function () {
     err: null,
     geoLocation: null,
     tags: [
-      'Icecream',
-      'Eclair',
-      'Cupcake',
-      'Gingerbread'
+      'Historia',
+      'Museu',
+      'Livros',
+      'Cultura',
+      'Restaurante',
+      'Regional',
+      'Bebida',
+      'Comida',
+      'Aventura',
+      'Trilha',
+      'Cachoeira',
+      'Natureza'
     ]
   }
 }

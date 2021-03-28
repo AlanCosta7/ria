@@ -30,7 +30,7 @@
         </q-timeline>
       </div>
     </q-card>
-      <div class="width-full q-gutter-md row justify-center" >
+      <div class="width-full q-gutter-md row justify-center q-pa-md" >
         <q-btn color="accent" outline icon="keyboard_arrow_left" label="Voltar" @click="onVoltar" />
         <q-btn color="accent" icon="local_atm" label="Comprar" @click="onSalvar" />
       </div>

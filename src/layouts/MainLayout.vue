@@ -149,11 +149,9 @@ export default defineComponent({
     },
     facebook() {
       openURL()
-
     },
     instagram() {
       openURL()
-
     },
 
   },

@@ -28,15 +28,22 @@
 
 <script>
 import { mapGetters } from "vuex";
+import { LocalStorage } from 'quasar'
 
 export default {
   name: "PageOrçamento",
   data() {
     return {
-      orcamento: 500
+
     }
   },
   methods: {
+    onInteresses() {
+      this.$router.replace({ name: 'interesses'})
+    },
+    onOrcamento() {
+      this.$router.replace({ name: 'orcamento'})
+    },
     onViagens(item) {
       if (this.currentUser) {
 
@@ -52,7 +59,6 @@ export default {
     },
     login() {
         this.$router.replace({ name: 'login'})
-
     },
     onSalvar() {
       this.$store.dispatch("salvarInteresses", this.interesses);
@@ -66,6 +72,15 @@ export default {
     }),
   },
   mounted() {
+    this.interesses = LocalStorage.getItem('interesses')
+    this.orcamento = LocalStorage.getItem('orcamento')
+    console.log(this.interesses)
+    if (!this.interesses) {
+      this.onInteresses()
+
+    } else if (!this.orcamento) {
+      this.onOrcamento()
+    }
   },
 };
 </script>
