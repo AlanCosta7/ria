@@ -2,6 +2,7 @@ export default function () {
   return {
     currentUser: null,
     token: null,
+    selectViagem: null,
     user: {
       email: '',
       cpf: '',
@@ -12,6 +13,7 @@ export default function () {
     },
     err: null,
     geoLocation: null,
+    listPackages: [],
     tags: [
       'Historia',
       'Museu',

@@ -193,6 +193,71 @@ export function salvarInteresses({ commit, state }, payload) {
 
 }
 
+export function getPackagesAuth ({ commit, state }) {
+  // axios
+  if (!state.currentUser) {
+    return null
+  } else {
+    var token = state.token
+
+    var path = "https://ria-back.herokuapp.com/users/packages/matched"
+
+    return axios({
+      method: 'GET',
+      url: path,
+      headers: {
+        "Authorization": token,
+        "Content-Type": "application/json",
+      }
+    }).then(function (response) {
+      console.log(response)
+      if (response.status == "200") {
+        commit('setListPackages', response.data)
+      }
+    }).catch( error => {
+      console.log(error)
+      Notify.create({
+        position: 'top',
+        message: 'Erro ao carregar viagens',
+        timeout: 3000,
+        color: 'negative'
+      })
+      return false
+    })
+  }
+}
+
+export function getPackages ({ commit, state }, payload) {
+  // axios
+
+    var path = "https://ria-back.herokuapp.com/packages"
+
+    return axios({
+      method: 'GET',
+      url: path,
+      data: payload,
+      headers: {
+        "Content-Type": "application/json",
+      }
+    }).then(function (response) {
+      console.log(response)
+      if (response.status == "200") {
+        commit('setListPackages', response.data)
+      }
+    }).catch( error => {
+      console.log(error)
+      Notify.create({
+        position: 'top',
+        message: 'Erro ao carregar viagens',
+        timeout: 3000,
+        color: 'negative'
+      })
+      return false
+    })
+}
+
+
+
 export function saveProfile ({ commit, state }, payload) {
   // axios
   var token = state.currentUser.token
@@ -283,158 +348,4 @@ export function logout ({ commit, state }) {
   commit('setCurrentUser', null)
   LocalStorage.set('user', null)
   return true
-}
-
-// Precisa ser implementado
-export function saveInstitution ({ commit, state }, payload) {
-  // axios
- console.log('saveInstitution', payload)
- commit('setInstitution', payload)
-
- return payload
-}
-
-export function getListStudent ({ commit, state }) {
-  // axios
-  if (!state.currentUser && state.currentUser.token) {
-    return null
-  } else {
-    var path = "https://reset-back-end.herokuapp.com/mentor/students"
-    var token = state.currentUser.token
-
-
-    return axios({
-      method: 'GET',
-      url: path,
-      headers: {
-        "Content-Type": "application/json",
-        token: token
-      }
-    }).then(function (response) {
-
-      if (response.status == "200") {
-        commit('setListStudent', response.data)
-      //  console.log('signInWithCpfAndPassword', response.data)
-      }
-    })
-  }
-}
-
-export function getInstituicao ({ commit, state }, payload) {
-  // axios
-  var path = `https://reset-back-end.herokuapp.com/institution/${payload}`
-
-  return axios({
-    method: 'GET',
-    url: path
-  }).then(function (response) {
-
-    if (response.status == "200") {
-      return response.data
-      //console.log('setInstituicao', response.data)
-    }
-  })
-}
-
-export function getInstituicaoAll ({ commit, state }) {
-  // axios
-  var path = `https://reset-back-end.herokuapp.com/institution`
-
-  return axios({
-    method: 'GET',
-    url: path
-  }).then(function (response) {
-
-    if (response.status == "200") {
-      commit('setInstituicaoAll', response.data)
-
-      return response.data
-      //console.log('setInstituicao', response.data)
-    }
-  })
-}
-
-export function setMentoriar ({ commit, state }, payload) {
-  // axios
-  var path = "https://reset-back-end.herokuapp.com/mentor/students"
-  var token = state.currentUser.token
-  //console.log('setMentoriar', token, payload)
-
-  var data = {
-    student: payload
-  }
-
-  return axios({
-    method: 'POST',
-    url: path,
-    headers: {
-      "Content-Type": "application/json",
-      token: token
-    },
-    data: data,
-  }).then(function (response) {
-   // console.log('setMentoriar', response)
-    if (response.status == "200") {
-      return response.data
-      //console.log('setInstituicao', response.data)
-    }
-  }).catch(error => {
-    console.log('setMentoriar', error)
-
-  })
-}
-
-export function getTrilha ({ commit, state }, payload) {
-  // axios
-  var path = `https://reset-back-end.herokuapp.com/journey/${payload}`
-
-  return axios({
-    method: 'GET',
-    url: path,
-  }).then(function (response) {
-
-    if (response.status == "200") {
-       commit('setTrilha', response.data)
-      //console.log('setTrilha', response)
-    }
-  })
-}
-
-export function getAllJornada ({ commit, state }) {
-  // axios
-  var path = "https://reset-back-end.herokuapp.com/journey"
-
-  return axios({
-    method: 'GET',
-    url: path,
-  }).then(function (response) {
-
-    if (response.status == "200") {
-      commit('setListaTrilha', response.data)
-      //console.log('setListaTrilha', response)
-    }
-  })
-}
-
-export function getListMentoriados ({ commit, state }) {
-  // axios
-  var path = "https://reset-back-end.herokuapp.com/mentor/students"
-  var token = state.currentUser.token
-
-  return axios({
-    method: 'GET',
-    url: path,
-    headers: {
-      "Content-Type": "application/json",
-      token: token
-    }
-  }).then(function (response) {
-    if (response.status == "200") {
-      commit('setlistMentoriados', response.data)
-      //console.log('signInWithCpfAndPassword', response.data)
-    }
-  }).catch(error => {
-    console.log('error', error)
-
-  })
 }

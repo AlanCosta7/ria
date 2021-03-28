@@ -8,15 +8,29 @@
         Viagens
       </div>
       <div class="fit row justify-center">
-        <q-list dense class="fit q-pa-md q-my-xl" style="max-width: 600px">
-          <q-card class="my-card">
+        <q-list dense class="fit q-pa-md q-my-xl" style="max-width: 600px" v-for="(item, index) in listPackages" :key="index">
+          <q-card>
+              <q-img
+                :src="item.image"
+                :ratio="20/10"
+                width="100%"
+                spinner-color="primary"
+                spinner-size="82px"
+              >
+
+              <template v-slot:error>
+                <div class="absolute-full flex flex-center bg-negative text-white">
+                  Imagem não encontrada
+                </div>
+              </template>
+              </q-img>
             <q-card-section>
-              <div class="text-bold text-h5 text-center">Our Changing Planet</div>
+              <div class="text-bold text-h5 text-center">{{item.name}}</div>
             </q-card-section>
             <q-card-section>
-              <div class="row items-center justify-around">
-                <div class="text-bold text-positive text-h6">R$1300</div>
-                <div><q-btn color="deep-orange" dense class="q-px-md" label="VER ROTAS" @click="onViagens(item)" /></div>
+              <div class="row width-full items-center justify-around">
+                <div class="text-bold col-6 text-positive text-h6">R${{item.price/100}}</div>
+                <div class="col-6"><q-btn color="deep-orange" class="q-px-md" dense label="VER ROTAS" @click="onViagens(item)" /></div>
               </div>
             </q-card-section>
           </q-card>
@@ -47,7 +61,7 @@ export default {
     onViagens(item) {
       if (this.currentUser) {
 
-        this.$store.dispatch("salvarInteresses", item)
+        this.$store.commit("setSelectViagem",item)
         this.$router.replace({ name: 'rotas'})
 
       } else {
@@ -67,6 +81,7 @@ export default {
   computed: {
     ...mapGetters({
       currentUser: "currentUser",
+      listPackages: "listPackages",
       err: "err",
       tags: "tags",
     }),
@@ -74,13 +89,28 @@ export default {
   mounted() {
     this.interesses = LocalStorage.getItem('interesses')
     this.orcamento = LocalStorage.getItem('orcamento')
-    console.log(this.interesses)
     if (!this.interesses) {
       this.onInteresses()
 
     } else if (!this.orcamento) {
       this.onOrcamento()
     }
+
+    if(this.currentUser) {
+      this.$store.dispatch("getPackagesAuth")
+      console.log('getPackagesAuth')
+    } else {
+
+      var value = {
+        tags: this.interesses,
+        budget: this.orcamento
+      }
+
+      console.log('getPackages', value)
+      this.$store.dispatch("getPackages", value)
+
+    }
+
   },
 };
 </script>

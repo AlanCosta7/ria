@@ -20,3 +20,12 @@ export const setGeoLocation = (state, payload) => {
 export const setToken = (state, payload) => {
   state.token = payload
 };
+
+export const setListPackages = (state, payload) => {
+  state.listPackages = payload
+};
+
+
+export const setSelectViagem = (state, payload) => {
+  state.selectViagem = payload
+};

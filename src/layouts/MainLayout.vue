@@ -165,10 +165,10 @@ export default defineComponent({
       }
     }
   },
-  mounted() {
+  created() {
     var user = LocalStorage.getItem('user')
     this.$store.commit('setCurrentUser', user)
-
+    console.log(user)
     var token = LocalStorage.getItem('token')
     this.$store.commit('setToken', token)
   },

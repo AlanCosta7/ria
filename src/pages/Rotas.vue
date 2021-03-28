@@ -7,6 +7,10 @@
       >
         Rotas
       </div>
+      <div class="width-full row justify-center q-ma-md">
+        <q-btn color="deep-orange" flat icon="share" label="Compartilhar" @click="onShare" />
+
+      </div>
       <div class="row width-full justify-center q-ma-md">
         <q-timeline color="deep-orange" style="max-width: 600px">
           <q-timeline-entry title="Partida" class="">
@@ -62,14 +66,16 @@ export default {
     onSalvar() {
       this.$store.dispatch("salvarInteresses", this.interesses);
     },
+    onShare() {
+
+    }
   },
   computed: {
     ...mapGetters({
       currentUser: "currentUser",
+      selectViagem: "selectViagem",
       err: "err"
     }),
-  },
-  mounted() {
   },
 };
 </script>
