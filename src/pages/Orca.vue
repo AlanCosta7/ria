@@ -37,7 +37,7 @@
         class="q-px-xl"
         icon-right="chevron_right"
         label="Próximo"
-        @click="onProximo"
+        @click="onProximo()"
       />
     </div>
   </q-page>
