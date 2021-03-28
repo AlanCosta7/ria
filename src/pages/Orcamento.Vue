@@ -7,7 +7,7 @@
       >
         <div class="col-12 text-center">Orçamento</div>
         <div class="text-positive col-12 text-center q-mt-md">
-          R${{ orcamento }}
+          R${{ orcamento/100 }}
         </div>
       </div>
       <div class="fit row justify-center">
@@ -20,9 +20,9 @@
               <q-slider
                 class="width-full"
                 v-model="orcamento"
-                :min="500"
-                :max="20000"
-                :step="100"
+                :min="50000"
+                :max="2000000"
+                :step="10000"
                 color="accent"
               />
             </q-item-section>
@@ -51,13 +51,13 @@ export default {
   name: "PageOrçamento",
   data() {
     return {
-      orcamento: 500,
+      orcamento: 50000,
     };
   },
   methods: {
     onProximo() {
       if (this.currentUser) {
-        var budget = this.orcamento*100;
+        var budget = this.orcamento;
         this.$store
           .dispatch("salvarInteresses", { budget: budget })
           .then((result) => {
@@ -71,7 +71,7 @@ export default {
             console.log(error);
           });
       } else {
-        var budget = this.orcamento*100;
+        var budget = this.orcamento;
         LocalStorage.set("orcamento", budget);
         this.$router.replace({ name: "viagens" });
       }
@@ -86,7 +86,7 @@ export default {
   mounted() {
     var orcamento = LocalStorage.getItem("orcamento");
     if (orcamento) {
-      this.orcamento = orcamento/100;
+      this.orcamento = orcamento
     }
   }
 }

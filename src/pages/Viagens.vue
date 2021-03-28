@@ -40,16 +40,8 @@
             <q-card-section>
               <div class="row width-full items-center justify-around">
                 <div class="text-bold col-auto text-positive text-h6">R${{item.price/100}}</div>
-                <div class="col-auto">
-                  <q-circular-progress
-                    show-value
-                    class="text-light-blue q-ma-md"
-                    :value="item.matching*100"
-                    size="70px"
-                    color="light-blue"
-                  >
-                    {{ (item.matching*100).toFixed(0) }}%
-                  </q-circular-progress>
+                <div class="col-6">
+                  <div class="">{{ (item.matching*100).toFixed(0) }}% com seu pertil</div>
                 </div>
                 <div class="col-12 full-width"><q-btn color="deep-orange" class="full-width" dense label="VER ROTAS" @click="onViagens(item)" /></div>
               </div>

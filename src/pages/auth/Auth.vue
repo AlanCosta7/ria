@@ -13,7 +13,6 @@
         spinner-color="primary"
         spinner-size="82px"
       />
-      <div class="col-12 text-center text-h5 q-my-xl mobile-only">Login</div>
 
       <q-tabs
         v-model="tab"
