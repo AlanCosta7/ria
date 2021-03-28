@@ -18,7 +18,7 @@
             spinner-size="82px"
           />
         </div>
-        <q-list v-show="listPackages.length > 0" dense class="fit q-pa-md q-my-xl" style="max-width: 600px" v-for="(item, index) in listPackages" :key="index">
+        <q-list v-show="listPackages.length > 0" dense class="fit q-pa-md q-my-md" style="max-width: 600px" v-for="(item, index) in listPackages" :key="index">
           <q-card>
               <q-img
                 :src="item.image"
@@ -39,17 +39,19 @@
               </q-img>
             <q-card-section>
               <div class="row width-full items-center justify-around">
-                <div class="text-bold col-6 text-positive text-h6">R${{item.price/100}}</div>
-                <div>
-                  <q-knob
+                <div class="text-bold col-auto text-positive text-h6">R${{item.price/100}}</div>
+                <div class="col-auto">
+                  <q-circular-progress
                     show-value
-                    class="text-secondary q-ma-md"
-                    v-model="item.tagMatches"
-                    size="50px"
+                    class="text-light-blue q-ma-md"
+                    :value="item.matching*100"
+                    size="70px"
                     color="light-blue"
-                  />
+                  >
+                    {{ (item.matching*100).toFixed(0) }}%
+                  </q-circular-progress>
                 </div>
-                <div class="col-6"><q-btn color="deep-orange" class="q-px-md" dense label="VER ROTAS" @click="onViagens(item)" /></div>
+                <div class="col-12 full-width"><q-btn color="deep-orange" class="full-width" dense label="VER ROTAS" @click="onViagens(item)" /></div>
               </div>
             </q-card-section>
           </q-card>

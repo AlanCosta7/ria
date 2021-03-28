@@ -1,10 +1,19 @@
 <template>
   <q-page class="bg-grey-2 row justify-center">
-    <q-card flat class="bg-grey-2" style="max-width: 400px; width:100vw">
+    <q-card flat class="bg-grey-2" style="width:100vw">
       <div
         class="full-width bg-white row wrap justify-center items-start content-start relative-position"
-        style="height: 300px; border-radius: 0 0 30px 30px;"
+        style="height: 200px; border-radius: 0 0 30px 30px;"
       >
+      <q-img
+        class="mobile-only"
+        src="../../assets/logoMarca.svg"
+        :ratio="1"
+        width="120px"
+        spinner-color="primary"
+        spinner-size="82px"
+      />
+      <div class="col-12 text-center text-h5 q-my-xl mobile-only">Login</div>
 
       <q-tabs
         v-model="tab"

@@ -56,7 +56,7 @@ export function createUserWithEmailAndPassword ({ commit, state }, payload) {
       "Content-Type": "application/json",
     }
   }).then(function (response) {
-    if (response.status == "201") {
+    if (response.status == "200") {
       commit('setCurrentUser', response.data.user)
       commit('setToken', response.data.token)
 
@@ -134,7 +134,7 @@ return axios({
     "Content-Type": "application/json",
   }
 }).then(function (response) {
-  if (response.status == "201") {
+  if (response.status == "200") {
     commit('setCurrentUser', response.data.user)
     commit('setToken', response.data.token)
 
