@@ -1,1 +1,1 @@
-web: yarn start:pwa
+web: quasar dev -m pwa
