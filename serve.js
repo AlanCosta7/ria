@@ -6,7 +6,7 @@ serveStatic = require('serve-static')
 
 const app = express()
 
-app.use(cors())
+// app.use(cors())
 
 app.use(serveStatic(htmlpath))
 
