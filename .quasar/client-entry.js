@@ -36,20 +36,11 @@ import 'src/css/app.scss'
 import createQuasarApp from './app.js'
 
 
-<<<<<<< HEAD
-=======
 import 'app/src-pwa/register-service-worker'
->>>>>>> origin/deploy
 
 
 
 
-<<<<<<< HEAD
-console.info('[Quasar] Running SPA.')
-
-
-
-=======
 
 
 
@@ -57,7 +48,6 @@ console.info('[Quasar] Running SPA.')
 if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream && window.navigator.standalone) {
   import(/* webpackChunkName: "fastclick"  */ '@quasar/fastclick')
 }
->>>>>>> origin/deploy
 
 
 const publicPath = `/`
