@@ -8,7 +8,17 @@
         Viagens
       </div>
       <div class="fit row justify-center">
-        <q-list dense class="fit q-pa-md q-my-xl" style="max-width: 600px" v-for="(item, index) in listPackages" :key="index">
+        <div class="q-mt-xl">
+          <q-img
+            src="../assets/empty.svg"
+            :ratio="1"
+            width="90vw"
+            style="max-width: 400px"
+            spinner-color="primary"
+            spinner-size="82px"
+          />
+        </div>
+        <q-list v-if="listPackages.length > 0" dense class="fit q-pa-md q-my-xl" style="max-width: 600px" v-for="(item, index) in listPackages" :key="index">
           <q-card>
               <q-img
                 :src="item.image"

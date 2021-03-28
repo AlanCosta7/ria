@@ -54,7 +54,15 @@ export default {
       this.$router.push({ name: 'viagens'})
     },
     onSalvar() {
-      this.$store.dispatch("salvarInteresses", this.interesses);
+      if (this.currentUser) {
+        this.$store.dispatch("salvarInteresses", this.interesses);
+
+      } else {
+        this.login()
+      }
+    },
+    login() {
+      this.$router.push({ name: 'login'})
     },
     onShare() {
 
