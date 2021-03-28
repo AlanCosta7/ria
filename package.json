@@ -6,7 +6,7 @@
   "author": "alanpc7 <alanpc7@gmail.com>",
   "private": true,
   "scripts": {
-    "postinstall": "npm run build",
+    "postinstall": "yarn build",
     "start": "node server.js",
     "start:pwa": "quasar dev -m pwa",
     "build": "quasar build -m pwa",
