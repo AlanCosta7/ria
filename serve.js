@@ -7,9 +7,9 @@ app.use(cors())
 
 app.use(express.static('dist/pwa'))
 
-app.get('/*', (res, req) => {
+app.get('/*', (req, res) => {
   res.sendFile(htmlpath)
 })
-const port = process.env.PORT || 8080
+const port = process.env.PORT || 9000
 
 app.listen(port)
