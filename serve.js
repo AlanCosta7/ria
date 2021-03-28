@@ -1,11 +1,10 @@
-const express = require("express")
-const cors = require("cors")
+var express = require('express')
+var path = require('path')
+var serveStatic = require('serve-static')
 
-const app = express()
-app.use(cors())
+var app = express()
+app.use(serveStatic(path.join(__dirname, 'dist/pwa')))
 
-app.use(express.static('dist/pwa'))
-
-const port = process.env.PORT || 8080
-
+var port = process.env.PORT || 5000
 app.listen(port)
+console.log('server started ' + port)
